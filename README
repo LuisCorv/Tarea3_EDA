@@ -12,7 +12,7 @@ Los pasos para utilizar el codigo son:
         Luego hacer que la terminal se ubique en la carpeta tests, ocupar el comando cmake .. (si fallase ocupe este cmake .. -G "MinGW Makefiles").
         Una vez echo esto notaremos que se crearon nuevos archivos en la carpeta tests, incluyendo un Makefile. Para que se ejecute este Makefile se
         debe de ejecutar el siguiente comando make (si fallase ocupe este mingw32-make). Con esto se nos deberia de generar un executable de nombre
-        test_tree.exe . Para correr este ejecutable debe ingresar un comando que varia dependiendo de su dispositivo, en el caso de windows 
+        treeSO.exe . Para correr este ejecutable debe ingresar un comando que varia dependiendo de su dispositivo, en el caso de windows 
         seria test.exe , y vea el resultado sobre el metodo deseado en la terminal. 
         
         Cabe recalcar que todos estos comandos se escriben en la terminal, y que el resultado tambien se muestra en esta.

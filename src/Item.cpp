@@ -11,7 +11,7 @@
 namespace trees {
 
 Item::Item(std::string nom, int val): parent(nullptr), nombre(nom), children(new TreeList()) {
-	if (val >1){
+	if (val >1 | val<0){
 		std::cout<< "El valor asignado para crear la carpeta/archivo es "<<val<<" , por lo que es invalido.\n Si desea una carpeta asigne 1 a val, y si es un archivo 0. "<< std::endl;
 		exit(1);	
 	}
