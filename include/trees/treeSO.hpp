@@ -17,7 +17,6 @@ class TreeSO {
 private:	
 	Item* root; //Es la raiz del sistema de archivos
 	Item * dir;	//Es la ubicacion actual en el sistema de archivos
-	std::string rut_dir;		//Es la ruta hasta dir
 public:
 	TreeSO();
 	void insert(Item* node,Item* parent);
@@ -26,7 +25,7 @@ public:
 	void mkdir(std::string nom);						//♦♦♦♦Funcion para crear carpetas o directorios
 	void mkfile(std::string nom, std::string ruta);		//♦♦♦♦funcion para crear archivos
 	
-	void ls_rec(TreeListNode* ptr);
+	void ls_rec( TreeListNode* ptrt);
 	void ls(std::string ruta);		//♦♦♦♦funcion para mostrar lo que se encuentra en esa carpeta 
 
 	void cd(std::string ruta); 		//♦♦♦♦Funcion para movernos de carpeta 

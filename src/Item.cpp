@@ -25,6 +25,9 @@ void Item::setParent(Item* node){
 void Item::setChildren(TreeList* list){
 	children = list;
 }
+void Item::setRuta(std::string rut){
+	ruta_nodo = rut;
+}
 Item* Item::getParent(){
 	return parent;
 }
@@ -36,6 +39,9 @@ int Item::getType(){
 }
 TreeList* Item::getChildren(){
 	return children;
+}
+std::string Item::getRuta(){
+	return ruta_nodo;
 }
 
 Item::~Item() {
