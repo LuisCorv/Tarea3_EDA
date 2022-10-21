@@ -1,0 +1,20 @@
+Para poder compilar este codigo, se debe de tener instalado Cmake y un compilador de c++.
+
+Los pasos para utilizar el codigo son:
+
+    0°  Modificar , si se tuviese que, la version de cmake en el archivo CMakeLists.txt
+
+    1°  Ubicarse en la carpeta tests y abrir el test.cpp.
+
+    2°  ...
+
+    3°  Se debe de compilar con Cmake todo el codigo. Para esto, se deben de ubicar en la carpeta tests y abrir la terminal.
+        Luego hacer que la terminal se ubique en la carpeta tests, ocupar el comando cmake .. (si fallase ocupe este cmake .. -G "MinGW Makefiles").
+        Una vez echo esto notaremos que se crearon nuevos archivos en la carpeta tests, incluyendo un Makefile. Para que se ejecute este Makefile se
+        debe de ejecutar el siguiente comando make (si fallase ocupe este mingw32-make). Con esto se nos deberia de generar un executable de nombre
+        test_tree.exe . Para correr este ejecutable debe ingresar un comando que varia dependiendo de su dispositivo, en el caso de windows 
+        seria test.exe , y vea el resultado sobre el metodo deseado en la terminal. 
+        
+        Cabe recalcar que todos estos comandos se escriben en la terminal, y que el resultado tambien se muestra en esta.
+
+    
