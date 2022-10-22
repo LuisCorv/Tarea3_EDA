@@ -11,12 +11,23 @@ int main(int nargs, char** vargs){
 
 	std::cout<< SO.getRuta_dir()<< "#"<<std::endl;		//imprimir la ubicacion actual en el sistema de archivos
 	SO.mkdir("Hola");
-	SO.mkdir("Holaa");
+	SO.mkdir("Hola");
+	SO.mkfile("Holaa",".");
 	SO.mkdir("Holaab");
 	SO.ls(".");
+
 	SO.cd("Hola");
 	SO.mkdir("a");
+	SO.mkdir("Hola");
 	SO.ls(".");
+
+	SO.cd("..");
+	SO.ls(".");
+	
+	SO.cd("/Hola/a");
+	SO.mkfile("Holaa",".");
+	SO.ls(".");
+	//SO.find("..","Hola");
 	//♦♦♦♦ver como hacerlo con los argv y argc para que se vaya interactuando con la terminal
 	SO.tree();
 	SO.exit();

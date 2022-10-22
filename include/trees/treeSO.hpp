@@ -19,8 +19,6 @@ private:
 	Item * dir;	//Es la ubicacion actual en el sistema de archivos
 public:
 	TreeSO();
-	void insert(Item* node,Item* parent);
-	void insert(std::string nom, int val_child , std::string nom_parent);
 
 	void mkdir(std::string nom);						//♦♦♦♦Funcion para crear carpetas o directorios
 	void mkfile(std::string nom, std::string ruta);		//♦♦♦♦funcion para crear archivos
@@ -33,8 +31,9 @@ public:
 	void rm_rec(std::string nom, TreeList * nodo);
 	void rm(std::string nom);		//♦♦♦♦Funcion para eliminar 1 archivo o 1 carpeta (y los archivos que contiene) en la ubicacion actual
 
-	Item* find_rec(std::string nom, Item* node);		//♦♦♦♦♦♦ Arreglar este find para que cumpla lo que nos piden
-	Item* find(std::string nom);				//♦♦♦♦♦♦ Arreglar este find para que cumpla lo que nos piden
+	TreeList* find_rec(std::string nom, Item* node, TreeList* lista);		//♦♦♦♦♦♦ Arreglar este find para que cumpla lo que nos piden
+	TreeList* find(std::string ruta, std::string nom);				//♦♦♦♦♦♦ Arreglar este find para que cumpla lo que nos piden
+
 
 	void tree_rec(Item* node, int level);	//funcion para imprimir en formato de arbol
 	void tree();
@@ -42,6 +41,13 @@ public:
 	void exit();	//Funcion para salir del sistema de archivos
 
 	std::string getRuta_dir();
+
+	Item* find_ruta_rec(std::string nom, Item* node);		//metodo recursivo que nos permite encontrar un Item dada una ruta
+	Item* find_ruta(std::string nom);				//metodo auxiliar para encontrar un Item dada una ruta4
+
+	Item* find_in_file_rec(std::string nom, TreeList* childrens);		//metodo recursivo que nos permite encontrar un Item dada un nombre dentro de un objeto en dir
+	Item* find_in_file(std::string nom, Item * nodo);				//metodo auxiliar para encontrar un Item dada un nombre dentro de un objeto en dir
+
 	virtual ~TreeSO();
 };
 
