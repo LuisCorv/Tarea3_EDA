@@ -289,40 +289,39 @@ void print_find(TreeList* lista){
 	std::cout<<std::endl;
 }
 
-/*TreeList* find_rec(std::string nom, Item* node, TreeList* lista){ //Arreglar para que nos de lo que piden
+TreeList* TreeSO::find_rec(std::string nom, Item* node, TreeList* lista){ //Arreglar para que nos de lo que piden
 	Item* ans = nullptr;
 	if (node != nullptr){
+		std::cout<< "h a f " << std::endl;
 		if (node->getName() == nom){
+			std::cout<< node->getName()<< std::endl;
 			ans=node;
 			lista->insertFirst(ans);
+			std::cout<<node->getName()<<std::endl;
 		}
 		else{ // search in children
+			std::cout<<"hijos"<<std::endl;
 			TreeList* childrenList = node->getChildren();
 			TreeListNode* ptr = childrenList->getHead();
-			if (ptr==0){
+			if (ptr==nullptr){
 			return lista;}
 			while (ptr!=nullptr && ans == nullptr){
+				std::cout<<ptr->getData()<<std::endl;
 				lista = find_rec(nom, ptr->getData(),lista);
 				ptr = ptr->getNext();
+				
 			}
 		}
 	}
 	return lista;
-}*/
+}
 TreeList* TreeSO::find(std::string ruta, std::string nom){//Arreglar para que nos de lo que piden
 	Item* nodo = nullptr;
 	TreeList* ans=nullptr;
 	std::string nom_nodo;
-	if (ruta=="."){
-		nodo=dir;
-	
-	}
-	else if (ruta==".."){
-		if(dir->getName()==root->getName()){
-			std::cout<< "Comando invalido:  Usted desea ir al directorio padre de " << root->getName() <<"# , lo cual no es posible, ya que es la raiz del sistema de archivos "<<std::endl;
-			return ans;
-		}
-		nodo=dir->getParent();
+
+	if (find_ruta(ruta)!=nullptr){
+		nodo=find_ruta(ruta);
 	}
 	else{
 		bool check = true;
@@ -341,8 +340,7 @@ TreeList* TreeSO::find(std::string ruta, std::string nom){//Arreglar para que no
 
 	//ver si es archivo o carpeta
 	if (nodo->getType()==1){		//si es carpeta
-			//ans= find_rec(nom, nodo, ans);		//debe retornar una lista con todas las coincidencias encontradas.
-
+			ans= find_rec(nom, nodo, ans);		//debe retornar una lista con todas las coincidencias encontradas.
 			//♦♦♦♦ Talvez es conveninete imprimir esta lista
 			print_find(ans);
 			return ans;
