@@ -58,37 +58,24 @@ int main(int nargs, char** vargs){
 						if (car_arch != ".."){
 							ruta = "/" + car_arch + "#";
 						}
-						else {
-							int co = 0;
-							for (int i = 0; i < ruta.length(); i++){
-								if (ruta[i] != '#'){
-									co++;
-								}
-								else if (ruta[i] == '#'){
-									ruta = ruta.erase(1, co-1);
-									break;
-								}
-							}
-						}
 					}	
 					else {
 						if (car_arch == ".."){
-							int co = 0;
-							for (int i = 0; i < ruta.length(); i++){
-								if (ruta[i] == '/'){
-									co++;
-								}
-							}
 							int ar = 0;
 							for (int j = ruta.length()-1; j > 0; j-- ){
 								if(ruta[j] == '#'){
-									ar++;
+									ruta.pop_back();
+								}
+								else if (ruta[j] != '#'){
+									ruta.pop_back();
 								}
 								else if (ruta[j] == '/'){
-									ruta = ruta.erase(ruta.length()-ar, ar-1);
+									ruta.pop_back();
+									
 									break;
 								}
 							}
+							ruta = ruta + "#";
 							cout << "Ruta dps de cd: " << ruta << endl;
 						}
 						else {
@@ -136,14 +123,16 @@ int main(int nargs, char** vargs){
 						extra = inicio;
 						break;
 					}
+					
+				}
+				cout << car_arch << endl;
 
-					if (inst == "mkfile"){
-						SO.mkfile(car_arch, extra);
-					}
+				if (inst == "mkfile"){
+					SO.mkfile(extra, car_arch);
+				}
 
-					else if (inst == "find"){
-						SO.find(car_arch, extra);
-					}
+				else if (inst == "find"){
+					SO.find(car_arch, extra);
 				}
 			}
 
