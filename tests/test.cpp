@@ -9,84 +9,149 @@ int main(int nargs, char** vargs){
 	trees::TreeSO SO;
 	cout<< "-- Bienvenido a TreeSO -- \n^^ Autores: Luis Corvalan y Macarena Ferrari ^^"<<endl;
 	cout<< SO.getRuta_dir()<< "#"<<endl;
+	string inicio;
+	string ruta = "/#";
+	string inst = "";
+	string car_arch = "";
+	string extra = "";
 	bool flag = false;
-	string ins;
-	string ruta = "";
-	string comm = "";
-	string nuevo;
+
 
 	while(!flag){
-		getline(cin, ins);
-		if (ins.length() == 0){
+		
+
+		cout << ruta << " ";
+		getline(cin, inicio);
+		cout << inicio << endl;
+
+		if (inicio.length() == 0){
 			cout<<"El comando ingresado no es válido"<<endl;
 			flag = true;
 		}
 		else {
-			if (ins[0]== '/'){
-				if (ins[1] != '#'){
-					for (int i = 0; i < ins.length(); i++){
-						if (ins[i] != '#'){
-							ruta = ruta + ins[i];
-						}
-						if (ins[i] == '#'){
-							ruta = ruta + '#';
-							ins = ins.erase(0, i+2);
-							break;
-						}
-						
-					}
-					cout<<"Ruta: "<<ruta<<endl;
-					
+			
+			
+			//obtener instruccion
+			inst = "";
+			for (int i=0; i < inicio.length(); i++){
+				if(inicio[i] != ' '){
+					inst = inst + inicio[i];
 				}
 
-				
-				else{
-					ruta = "/#";
-					ins = ins.erase(0,2);
+				else if (inicio[i] == ' '){
+					inicio = inicio.erase(0, i+1);
+					break;
 				}
-				
-				//obtener instruccion
-				for (int i=0; i < ins.length(); i++){
-					if(ins[i] != ' '){
-						comm = comm + ins[i];
+			}
+			//distintas instrucciones
+			car_arch = "";
+			if (inst == "exit"){
+				flag = true;
+
+			}
+			
+			else if (inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm" | inst == "tree"){
+				car_arch = inicio;
+
+				if (inst == "cd"){
+					if (ruta == "/#"){
+						if (car_arch != ".."){
+							ruta = "/" + car_arch + "#";
+						}
+						else {
+							int co = 0;
+							for (int i = 0; i < ruta.length(); i++){
+								if (ruta[i] != '#'){
+									co++;
+								}
+								else if (ruta[i] == '#'){
+									ruta = ruta.erase(1, co-1);
+									break;
+								}
+							}
+						}
+					}	
+					else {
+						if (car_arch == ".."){
+							int co = 0;
+							for (int i = 0; i < ruta.length(); i++){
+								if (ruta[i] == '/'){
+									co++;
+								}
+							}
+							int ar = 0;
+							for (int j = ruta.length()-1; j > 0; j-- ){
+								if(ruta[j] == '#'){
+									ar++;
+								}
+								else if (ruta[j] == '/'){
+									ruta = ruta.erase(ruta.length()-ar, ar-1);
+									break;
+								}
+							}
+							cout << "Ruta dps de cd: " << ruta << endl;
+						}
+						else {
+							if (car_arch != ".."){
+								ruta = ruta.erase(ruta.length()-1, 1);
+								
+								ruta = ruta + "/" + car_arch + "#";
+								cout << ruta << endl;
+							}
 					}
-					else if (ins[i] == ' '){
-						ins = ins.erase(0, i+1);
+						
+					}
+					
+					
+					
+					SO.cd(car_arch);
+				}
+
+				else if (inst == "ls"){
+					SO.ls(car_arch);
+				}
+
+				else if (inst == "mkdir"){
+					SO.mkdir(car_arch);
+				}
+
+				else if (inst == "rm"){
+					SO.rm(car_arch);
+				}
+
+				else if (inst == "tree"){
+					SO.tree();
+				}
+			}
+
+			else if (inst == "mkfile" | inst == "find"){
+				//para obtener el tercer dato, en caso necesario
+				for (int j = 0; j < inicio.length(); j++){
+					if (inicio[j] != ' '){
+						car_arch = car_arch + inicio[j];
+					}
+
+					else if (inicio[j] == ' '){
+						inicio = inicio.erase(0, j+1);
+						extra = inicio;
 						break;
 					}
+
+					if (inst == "mkfile"){
+						SO.mkfile(car_arch, extra);
+					}
+
+					else if (inst == "find"){
+						SO.find(car_arch, extra);
+					}
 				}
-				cout << comm << endl;
-				nuevo = ins;
-				cout << nuevo << endl;
+			}
+
+			else {
+				cout << "Comando inválido, intente de nuevo" << endl;
 			}
 		}
 	}
 
-	//♦♦♦♦hacer un while que no termine hasta que llaman a exit del SO
-
-			//imprimir la ubicacion actual en el sistema de archivos
-			/*
-	SO.mkdir("A");
-	SO.mkdir("B");
-	SO.mkfile("c",".");
-	SO.mkdir("D");
-	SO.ls(".");
-
-	SO.cd("A");
-	SO.mkdir("a");
-	SO.mkdir("A");
-	SO.ls(".");
-
-	SO.cd("..");
-	SO.ls(".");
-	
-	SO.cd("/A/a");
-	SO.mkfile("a_",".");
-	SO.ls(".");
-	SO.find("/A","a");
-	//♦♦♦♦ver como hacerlo con los argv y argc para que se vaya interactuando con la terminal
-	SO.tree();
-	SO.exit();
-*/
 	return 0;
 }
