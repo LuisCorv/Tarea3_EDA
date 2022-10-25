@@ -25,6 +25,12 @@ void Item::setParent(Item* node){
 void Item::setChildren(TreeList* list){
 	children = list;
 }
+void Item::setName(std::string name){
+	nombre=name;
+}
+void Item::setType(int type){
+	tipo=type;
+}
 void Item::setRuta(std::string rut){
 	ruta_nodo = rut;
 }

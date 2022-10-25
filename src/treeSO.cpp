@@ -283,7 +283,7 @@ void print_find(TreeList* lista){
 	std::cout<<"# ";
 	TreeListNode* ptr = lista->getHead();
 	while (ptr!=nullptr ){
-		std::cout<<ptr->getData()->getName()<<" ";
+		std::cout<<ptr->getData()->getName()<<"  dir->("<< ptr->getData()->getRuta()<<") ";
 		ptr = ptr->getNext();
 	}
 	std::cout<<std::endl;
@@ -292,21 +292,17 @@ void print_find(TreeList* lista){
 TreeList* TreeSO::find_rec(std::string nom, Item* node, TreeList* lista){ //Arreglar para que nos de lo que piden
 	Item* ans = nullptr;
 	if (node != nullptr){
-		std::cout<< "h a f " << std::endl;
 		if (node->getName() == nom){
-			std::cout<< node->getName()<< std::endl;
-			ans=node;
+			ans=new Item(node->getName(),node->getType()); //copiamos los datos basicos del nodo, es decir nombre, tipo y su ruta
+			ans->setRuta(node->getRuta());		//si posteriormente se quisiese saber su padre, buscamos en base a esa ruta
 			lista->insertFirst(ans);
-			std::cout<<node->getName()<<std::endl;
 		}
 		else{ // search in children
-			std::cout<<"hijos"<<std::endl;
 			TreeList* childrenList = node->getChildren();
 			TreeListNode* ptr = childrenList->getHead();
 			if (ptr==nullptr){
 			return lista;}
 			while (ptr!=nullptr && ans == nullptr){
-				std::cout<<ptr->getData()<<std::endl;
 				lista = find_rec(nom, ptr->getData(),lista);
 				ptr = ptr->getNext();
 				
@@ -317,7 +313,8 @@ TreeList* TreeSO::find_rec(std::string nom, Item* node, TreeList* lista){ //Arre
 }
 TreeList* TreeSO::find(std::string ruta, std::string nom){//Arreglar para que nos de lo que piden
 	Item* nodo = nullptr;
-	TreeList* ans=nullptr;
+	TreeList list;
+	TreeList* ans=& list;
 	std::string nom_nodo;
 
 	if (find_ruta(ruta)!=nullptr){
@@ -340,9 +337,9 @@ TreeList* TreeSO::find(std::string ruta, std::string nom){//Arreglar para que no
 
 	//ver si es archivo o carpeta
 	if (nodo->getType()==1){		//si es carpeta
-			ans= find_rec(nom, nodo, ans);		//debe retornar una lista con todas las coincidencias encontradas.
-			//♦♦♦♦ Talvez es conveninete imprimir esta lista
-			print_find(ans);
+			ans= find_rec(nom, nodo, &list);		//debe retornar una lista con todas las coincidencias encontradas.
+			
+			print_find(ans);	//Consideramos que es conveninete imprimir esta lista
 			return ans;
 	}
 	else{		//si es archivo

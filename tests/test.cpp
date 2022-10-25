@@ -16,10 +16,10 @@ int main(int nargs, char** vargs){
 	string extra = "";
 	bool flag = false;
 
-
+//♦♦♦♦♦falta hacer algo para corroborar que no ingresen mas datos de los que acepta cada metodo
 	while(!flag){
 		
-
+		ruta=SO.getRuta_dir()+"# ";
 		cout << ruta << " ";
 		getline(cin, inicio);
 		cout << inicio << endl;
@@ -45,16 +45,22 @@ int main(int nargs, char** vargs){
 			}
 			//distintas instrucciones
 			car_arch = "";
-			if (inst == "exit"){
+			if (inst == "exit"){// si no recibe parametro
+				SO.exit();
 				flag = true;
 
 			}
+			else if (inst == "tree"){//si no recibe parametro
+					SO.tree();
+			}
 			
-			else if (inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm" | inst == "tree"){
+			else if (inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm"){	//Si recien solo 1 parametro
 				car_arch = inicio;
+				cout << car_arch << " ";
 
-				if (inst == "cd"){
-					if (ruta == "/#"){
+				if (inst == "cd"){	//arreglar este cd
+					if (ruta == "/# "){					//decirle  a la maca que la dir que nos dan no pueden dar no termina en #
+														//decirle tambien como funciona el cd implementado
 						if (car_arch != ".."){
 							ruta = "/" + car_arch + "#";
 						}
@@ -106,9 +112,6 @@ int main(int nargs, char** vargs){
 					SO.rm(car_arch);
 				}
 
-				else if (inst == "tree"){
-					SO.tree();
-				}
 			}
 
 			else if (inst == "mkfile" | inst == "find"){
@@ -132,7 +135,7 @@ int main(int nargs, char** vargs){
 				}
 
 				else if (inst == "find"){
-					SO.find(car_arch, extra);
+					SO.find( extra, car_arch);
 				}
 			}
 

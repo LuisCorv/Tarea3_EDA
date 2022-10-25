@@ -25,6 +25,8 @@ public:
 	Item(std::string nom, int val);
 	void setParent(Item* node);
 	void setChildren(TreeList* list);
+	void setName(std::string nombre);
+	void setType(int type);
 	void setRuta(std::string ruta);
 	Item* getParent();
 	std::string getName();
