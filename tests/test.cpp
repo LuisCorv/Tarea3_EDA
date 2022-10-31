@@ -22,7 +22,6 @@ int main(int nargs, char** vargs){
 		ruta=SO.getRuta_dir()+"# ";
 		cout << ruta << " ";
 		getline(cin, inicio);
-		cout << inicio << endl;
 
 		if (inicio.length() == 0){
 			cout<<"El comando ingresado no es válido"<<endl;
@@ -56,48 +55,50 @@ int main(int nargs, char** vargs){
 			
 			else if (inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm"){	//Si recien solo 1 parametro
 				car_arch = inicio;
-				cout << car_arch << " ";
 
 				if (inst == "cd"){	//arreglar este cd
-					if (ruta == "/# "){					//decirle  a la maca que la dir que nos dan no pueden dar no termina en #
-														//decirle tambien como funciona el cd implementado
+					bool ans = true;
+					if (ruta == "/# "){																			
 						if (car_arch != ".."){
-							ruta = "/" + car_arch + "#";
+							ruta = "/" + car_arch ;
+							
+						}
+						else{
+							cout << "Comando invalido, ya esta en la raiz del arbol" << endl;
+							ans = false;
 						}
 					}	
 					else {
 						if (car_arch == ".."){
-							int ar = 0;
+							
 							for (int j = ruta.length()-1; j > 0; j-- ){
-								if(ruta[j] == '#'){
-									ruta.pop_back();
-								}
-								else if (ruta[j] != '#'){
-									ruta.pop_back();
-								}
-								else if (ruta[j] == '/'){
+								
+								if (ruta[j] == '/'){
 									ruta.pop_back();
 									
 									break;
 								}
+								ruta.pop_back();
 							}
-							ruta = ruta + "#";
-							cout << "Ruta dps de cd: " << ruta << endl;
+
+							
+							
 						}
-						else {
-							if (car_arch != ".."){
-								ruta = ruta.erase(ruta.length()-1, 1);
-								
-								ruta = ruta + "/" + car_arch + "#";
-								cout << ruta << endl;
-							}
-					}
+						else {				
+							ruta = ruta.erase(ruta.length()-2, 2);
+							ruta = ruta + "/" + car_arch ;
+
+						}
 						
 					}
 					
 					
+					if (ans){
+						SO.cd(ruta);
+					}
 					
-					SO.cd(car_arch);
+
+					
 				}
 
 				else if (inst == "ls"){
@@ -128,14 +129,13 @@ int main(int nargs, char** vargs){
 					}
 					
 				}
-				cout << car_arch << endl;
 
 				if (inst == "mkfile"){
 					SO.mkfile(extra, car_arch);
 				}
 
 				else if (inst == "find"){
-					SO.find( extra, car_arch);
+					SO.find(extra, car_arch);
 				}
 			}
 
