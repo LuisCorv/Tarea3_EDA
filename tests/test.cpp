@@ -42,19 +42,36 @@ int main(int nargs, char** vargs){
 					break;
 				}
 			}
-			//distintas instrucciones
+
 			car_arch = "";
-			if (inst == "exit"){// si no recibe parametro
+			extra = "";
+			if (inst != "exit" | inst != "tree"){
+				for (int j = 0; j < inicio.length(); j++){
+					if (inicio[j] != ' '){
+						car_arch = car_arch + inicio[j];
+					}
+
+					else if (inicio[j] == ' '){
+						inicio = inicio.erase(0, j+1);
+						extra = inicio;
+						break;
+					}
+
+				}
+			}
+			
+			//distintas instrucciones
+			
+			if (inst == "exit" & car_arch == "exit"){// si no recibe parametro
 				SO.exit();
 				flag = true;
 
 			}
-			else if (inst == "tree"){//si no recibe parametro
+			else if (inst == "tree" & car_arch == "tree"){//si no recibe parametro
 					SO.tree();
 			}
 			
-			else if (inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm"){	//Si recien solo 1 parametro
-				car_arch = inicio;
+			else if ((inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm") & extra == ""){	//Si recien solo 1 parametro
 
 				if (inst == "cd"){	//arreglar este cd
 					bool ans = true;
@@ -115,28 +132,19 @@ int main(int nargs, char** vargs){
 
 			}
 
-			else if (inst == "mkfile" | inst == "find"){
-				//para obtener el tercer dato, en caso necesario
-				for (int j = 0; j < inicio.length(); j++){
-					if (inicio[j] != ' '){
-						car_arch = car_arch + inicio[j];
-					}
-
-					else if (inicio[j] == ' '){
-						inicio = inicio.erase(0, j+1);
-						extra = inicio;
-						break;
-					}
-					
-				}
+			else if ((inst == "mkfile" | inst == "find") & extra != ""){
+				
 
 				if (inst == "mkfile"){
 					SO.mkfile(extra, car_arch);
 				}
+				
 
 				else if (inst == "find"){
 					SO.find(extra, car_arch);
 				}
+
+				
 			}
 
 			else {
