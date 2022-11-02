@@ -216,6 +216,17 @@ void TreeSO::cd(std::string ruta){
 	else{
 		Item* parent= nullptr;	
 		bool ans = true;
+
+		if (ruta[0]!='/'){
+			TreeList*child=dir->getChildren();
+			TreeListNode* ptr = child->getHead();
+			while (ptr!=nullptr){
+				Item* search= ptr->getData();
+				if (search->getName()==ruta){
+					ruta = search->getRuta();
+				}
+			}
+		}
 		parent=find_ruta(ruta);	//metodo validar ruta
 		if (parent==nullptr | parent->getType()==0){
 			ans=false;
@@ -275,9 +286,6 @@ void TreeSO:: rm(std::string nom){
 
 }
 //------------------------------------------------------------------------------------------------------
-
-//♦♦♦♦	Arreglar el obtener el nodo
-//♦♦♦♦ Hacer el metodo
 
 void print_find(TreeList* lista){
 	std::cout<<"# ";

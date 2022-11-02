@@ -72,10 +72,15 @@ int main(int nargs, char** vargs){
 			}
 			
 			else if ((inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm") & extra == ""){	//Si recien solo 1 parametro
-
-				if (inst == "cd"){	//arreglar este cd
+				
+				
+				if (inst == "cd"){	
 					bool ans = true;
-					if (ruta == "/# "){																			
+					if(car_arch==inst ){ //arreglar este cd para que funcione si es que se pone cd cd
+							cout << "Comando inválido, intente de nuevo" << endl;
+						}
+					else{
+						if (ruta == "/# "){																			
 						if (car_arch != ".."){
 							ruta = "/" + car_arch ;
 							
@@ -86,6 +91,7 @@ int main(int nargs, char** vargs){
 						}
 					}	
 					else {
+						
 						if (car_arch == ".."){
 							
 							for (int j = ruta.length()-1; j > 0; j-- ){
@@ -101,6 +107,7 @@ int main(int nargs, char** vargs){
 							
 							
 						}
+						
 						else {				
 							ruta = ruta.erase(ruta.length()-2, 2);
 							ruta = ruta + "/" + car_arch ;
@@ -113,13 +120,21 @@ int main(int nargs, char** vargs){
 					if (ans){
 						SO.cd(ruta);
 					}
+					}
+					
 					
 
 					
 				}
 
-				else if (inst == "ls"){
-					SO.ls(car_arch);
+				else if (inst == "ls"){ 
+					if(car_arch==inst ){
+							cout << "Comando inválido, intente de nuevo" << endl;
+						}
+					else{
+						SO.ls(car_arch);
+					}
+					
 				}
 
 				else if (inst == "mkdir"){
@@ -135,12 +150,12 @@ int main(int nargs, char** vargs){
 			else if ((inst == "mkfile" | inst == "find") & extra != ""){
 				
 
-				if (inst == "mkfile"){
+				if (inst == "mkfile"){ //arreglar para que verifique bien al darle la cantidad correcta o mayor de datos
 					SO.mkfile(extra, car_arch);
 				}
 				
 
-				else if (inst == "find"){
+				else if (inst == "find"){//arreglar para que verifique bien al darle la cantidad correcta o mayor de datos
 					SO.find(extra, car_arch);
 				}
 
