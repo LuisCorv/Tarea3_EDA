@@ -6,15 +6,40 @@ Los pasos para utilizar el codigo son:
 
     1°  Ubicarse en la carpeta tests y abrir el test.cpp.
 
-    2°  ...
-
-    3°  Se debe de compilar con Cmake todo el codigo. Para esto, se deben de ubicar en la carpeta tests y abrir la terminal.
+    2°  Se debe de compilar con Cmake todo el codigo. Para esto, se deben de ubicar en la carpeta tests y abrir la terminal.
         Luego hacer que la terminal se ubique en la carpeta tests, ocupar el comando cmake .. (si fallase ocupe este cmake .. -G "MinGW Makefiles").
         Una vez echo esto notaremos que se crearon nuevos archivos en la carpeta tests, incluyendo un Makefile. Para que se ejecute este Makefile se
         debe de ejecutar el siguiente comando make (si fallase ocupe este mingw32-make). Con esto se nos deberia de generar un executable de nombre
         treeSO.exe . Para correr este ejecutable debe ingresar un comando que varia dependiendo de su dispositivo, en el caso de windows 
-        seria test.exe , y vea el resultado sobre el metodo deseado en la terminal. 
+        seria treeSO.exe , y vea el resultado sobre el metodo deseado en la terminal. 
         
         Cabe recalcar que todos estos comandos se escriben en la terminal, y que el resultado tambien se muestra en esta.
 
+    3°  Los comandos posibles a ejecutar al iniciar la 'terminal' son:
+        ♦ cd: Metodo para reubicarnos en una carpeta. Inicialmente nos ubicamos en la carpeta raiz, y para reposicionarnos, este comando recibe una ruta,
+              esta ruta puede ser '..' o del siguiente estilo → '/hola/a'. En el caso de '..', lo que se hace es moverse a la carpeta padre de la carpeta 
+              actual. Mientras que el otro caso, nos reubica directamente a esa posicion.
+
+        ♦ ls: Metodo para mostrar las carpetas o archivos que se encuentran en una direccion dada. Esta direccion puede ser '.','..' o del 
+              siguiente estilo → '/hola/a'. El '.' nos muestra lo que se encuentra en la ubicacion actual, '..' lo que se encuentra en la 
+              carpeta padre de la ubicacion actual y la otra opcion nos muestra lo que se encuentra en esa carpeta en especifico.
+
+        ♦ rm: Metodo para eliminar un archivo o carpeta a partir de la direccion actual. En el caso de querer eliminar una carpeta, se debe de eliminar
+              primero todo lo que esta contenga. Mientras que si es archivo, 'simplemente' se elimina.
+
+        ♦ mkfile:  
+        ♦ mkdir: Metodo para crear una carpeta en la direccion actual.
+        
+        ♦ tree: Metodo para representar el sistema de archivos desde ... en forma de arbol.
+
+        ♦ exit: Metodo que nos permite salir de la 'terminal'.
+
+        ♦ find:
+        En el caso de ingresar una ruta o nombre para un archivo/carpeta con el nombre de algunos de estos comandos, se mostrara en terminal el siguiente error:
+            " "
+        Y en el caso de ingresar mal algun comando se mostrara el siguiente mensaje:
+            " "
+        Otro posible mensaje de error es " " , el cual ocurre al intentar hacer '..' estando ubicado en la carpeta raiz.
+
+    tree imprime todo el arbol, rm elimina un archivo o carpeta desde la direccion actual, no se pueden crear carpetas con nombres de los comandos
     

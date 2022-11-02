@@ -67,64 +67,18 @@ bool check_name(std::string nom, TreeListNode* ptrt){
 }
 //------------------------------------------------------------------------------------------------------
 void TreeSO::mkdir(std::string nom){
-	bool ans = true;
-
-	//validar que no exista la carpeta con ese nombre
-	TreeList* childrenList = dir->getChildren();
-	TreeListNode* ptr = childrenList->getHead();
-	ans=check_name(nom,ptr);
-	
-	
-
-	if (ans){ 
-		Item* parent= dir;		//obtener el nodo padre es en este caso es dir
-		if (parent != nullptr){
-			Item* child= new trees::Item(nom,1);
-			if(dir->getRuta()==root->getRuta()){
-				child->setRuta(parent->getRuta()+nom);
-			}
-			else{
-				child->setRuta(parent->getRuta()+"/"+nom);
-			}
-			parent->getChildren()->insertFirst(child);
-			child->setParent(parent);
-		}
-	}
-	else{
-		std::cout<<"Ya existe una carpeta con nombre '"<<nom<<"' ingresada en el directorio: "<< dir->getName()<<std::endl;
-	}
-	
-}
-
-//------------------------------------------------------------------------------------------------------
-
-void TreeSO::mkfile(std::string nom, std::string ruta){
-	Item* parent= nullptr;		
-	bool ans = false;
-
-	//validar si la ruta es valida (ver que exista la ruta entre las Ruta de cada Item, ademas de revisar que esta ruta no termine en un Tipo =0)
-	
-	if(ruta=="."){ 
-		ans=true;
-		parent=dir;
-	}
-	else{
-		parent=find_ruta(ruta);	//metodo validar ruta
-		if (parent==nullptr | parent->getType()==0){
-			ans=false;
-		}
-	}
-	if (ans){ 
-		bool ans1 = true;
+	if (nom!="cd" and nom!="ls" and nom!="rm" and nom!="mkdir" and nom!="mkfile" and nom!="find" and nom!="exit" and nom!="tree"){
 		
-		//validar que no exista la carpeta con ese nombre
-		TreeList* childrenList = parent->getChildren();
-		TreeListNode* ptr = childrenList->getHead();
-		ans1=check_name(nom,ptr);
+		bool ans = true;
 
-		if (ans1){	//si no existe en la carpeta
+		//validar que no exista la carpeta con ese nombre
+		TreeList* childrenList = dir->getChildren();
+		TreeListNode* ptr = childrenList->getHead();
+		ans=check_name(nom,ptr);
+		if (ans){ 
+			Item* parent= dir;		//obtener el nodo padre es en este caso es dir
 			if (parent != nullptr){
-				Item* child= new trees::Item(nom,0);
+				Item* child= new trees::Item(nom,1);
 				if(dir->getRuta()==root->getRuta()){
 					child->setRuta(parent->getRuta()+nom);
 				}
@@ -136,12 +90,71 @@ void TreeSO::mkfile(std::string nom, std::string ruta){
 			}
 		}
 		else{
-		std::cout<<"Ya existe una carpeta con nombre '"<<nom<<"' ingresada en el directorio: "<< parent->getName()<<std::endl;
+			std::cout<<"Ya existe una carpeta con nombre '"<<nom<<"' ingresada en el directorio: "<< dir->getName()<<std::endl;
 		}
-		
 	}
 	else{
-		std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\n Esto puede ser debido a que se a ingresado el archivo '"<<parent->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
+		std::cout<< "Este nombre esta reservado, porfavor ingrese otro"<<std::endl;
+	}
+	
+}
+
+//------------------------------------------------------------------------------------------------------
+
+void TreeSO::mkfile(std::string nom, std::string ruta){
+	if ((nom!="cd" and nom!="ls" and nom!="rm" and nom!="mkdir" and nom!="mkfile" and nom!="find" and nom!="exit" and nom!="tree")){
+		if (ruta!="cd" and ruta!="ls" and ruta!="rm" and ruta!="mkdir" and ruta!="mkfile" and ruta!="find" and ruta!="exit" and ruta!="tree"){
+			Item* parent= nullptr;		
+			bool ans = false;
+
+			//validar si la ruta es valida (ver que exista la ruta entre las Ruta de cada Item, ademas de revisar que esta ruta no termine en un Tipo =0)
+			
+			if(ruta=="."){ 
+				ans=true;
+				parent=dir;
+			}
+			else{
+				parent=find_ruta(ruta);	//metodo validar ruta
+				if (parent==nullptr | parent->getType()==0){
+					ans=false;
+				}
+			}
+			if (ans){ 
+				bool ans1 = true;
+				
+				//validar que no exista la carpeta con ese nombre
+				TreeList* childrenList = parent->getChildren();
+				TreeListNode* ptr = childrenList->getHead();
+				ans1=check_name(nom,ptr);
+
+				if (ans1){	//si no existe en la carpeta
+					if (parent != nullptr){
+						Item* child= new trees::Item(nom,0);
+						if(dir->getRuta()==root->getRuta()){
+							child->setRuta(parent->getRuta()+nom);
+						}
+						else{
+							child->setRuta(parent->getRuta()+"/"+nom);
+						}
+						parent->getChildren()->insertFirst(child);
+						child->setParent(parent);
+					}
+				}
+				else{
+				std::cout<<"Ya existe una carpeta con nombre '"<<nom<<"' ingresada en el directorio: "<< parent->getName()<<std::endl;
+				}
+				
+			}
+			else{
+				std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\n Esto puede ser debido a que se a ingresado el archivo '"<<parent->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
+			}
+		}
+		else{
+		std::cout<< "Este nombre esta reservado, porfavor ingrese otro"<<std::endl;
+		}
+	}
+	else{
+		std::cout<< "Este nombre esta reservado, porfavor ingrese otro"<<std::endl;
 	}
 }
 
@@ -371,7 +384,7 @@ void TreeSO::tree_rec(Item* node, int level){
 	}
 }
 
-void TreeSO::tree(){
+void TreeSO::tree(){		//♦♦♦♦Arreglar tree para que sea de un nodo dado y no desde raiz
 	tree_rec(root, 1);
 	std::cout<<"#" <<std::endl;
 }

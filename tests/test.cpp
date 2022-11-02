@@ -16,7 +16,6 @@ int main(int nargs, char** vargs){
 	string extra = "";
 	bool flag = false;
 
-//♦♦♦♦♦falta hacer algo para corroborar que no ingresen mas datos de los que acepta cada metodo
 	while(!flag){
 		
 		ruta=SO.getRuta_dir()+"# ";
@@ -67,7 +66,7 @@ int main(int nargs, char** vargs){
 				flag = true;
 
 			}
-			else if (inst == "tree" & car_arch == "tree"){//si no recibe parametro
+			else if (inst == "tree" & car_arch == "tree"){//Modificar esto, ya que tree deberia recibir una ruta del nodo
 					SO.tree();
 			}
 			
@@ -76,7 +75,7 @@ int main(int nargs, char** vargs){
 				
 				if (inst == "cd"){	
 					bool ans = true;
-					if(car_arch==inst ){ //arreglar este cd para que funcione si es que se pone cd cd
+					if(car_arch==inst ){
 							cout << "Comando inválido, intente de nuevo" << endl;
 						}
 					else{
@@ -151,7 +150,7 @@ int main(int nargs, char** vargs){
 				
 
 				if (inst == "mkfile"){ //arreglar para que verifique bien al darle la cantidad correcta o mayor de datos
-					SO.mkfile(extra, car_arch);
+					SO.mkfile(car_arch, extra);
 				}
 				
 
