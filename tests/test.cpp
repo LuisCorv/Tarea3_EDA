@@ -24,7 +24,6 @@ int main(int nargs, char** vargs){
 
 		if (inicio.length() == 0){
 			cout<<"El comando ingresado no es válido"<<endl;
-			flag = true;
 		}
 		else {
 			
@@ -60,8 +59,8 @@ int main(int nargs, char** vargs){
 			}
 			
 			//distintas instrucciones
-			
-			if (inst == "exit" & car_arch == "exit"){// si no recibe parametro
+			cout<<car_arch;
+			if (inst == "exit" & car_arch == ""){// si no recibe parametro
 				SO.exit();
 				flag = true;
 

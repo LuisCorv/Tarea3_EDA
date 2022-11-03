@@ -19,30 +19,30 @@ Los pasos para utilizar el codigo son:
         ♦ cd: Metodo para reubicarnos en una carpeta. Inicialmente nos ubicamos en la carpeta raiz, y para reposicionarnos, este comando recibe una ruta,
               esta ruta puede ser '..' o del siguiente estilo → '/hola/a'. En el caso de '..', lo que se hace es moverse a la carpeta padre de la carpeta 
               actual. Mientras que el otro caso, nos reubica directamente a esa posicion.
-
+                ► El formato de este comando es : "cd <ruta>"
         ♦ ls: Metodo para mostrar las carpetas o archivos que se encuentran en una direccion dada. Esta direccion puede ser '.','..' o del 
               siguiente estilo → '/hola/a'. El '.' nos muestra lo que se encuentra en la ubicacion actual, '..' lo que se encuentra en la 
               carpeta padre de la ubicacion actual y la otra opcion nos muestra lo que se encuentra en esa carpeta en especifico.
-
+                ► El formato de este comando es : "ls <ruta>"
         ♦ rm: Metodo para eliminar un archivo o carpeta a partir de la direccion actual. En el caso de querer eliminar una carpeta, se debe de eliminar
               primero todo lo que esta contenga. Mientras que si es archivo, 'simplemente' se elimina.
-
+                ► El formato de este comando es : "rm <nombre_archivoOcarpeta_victima>"
         ♦ mkfile: Metodo que nos permite crear un archivo con un nombre determinado y en un lugar determinado. En nuestra sistema de archivos, no es posible que
                   dos archivos o carpetas poseean el mismo nombre dentro de una misma carpeta (En su nivel 'inicial'). Las direcciones que pueden recibir son
                   '.' si es desde la ubicacion actual, '..' si es para la del padre de la ubicacion actual y tambien pueden ser del siguiente estilo → '/hola/a' 
                   o 'a' si estamos estamos en 'hola'.
-
+                ► El formato de este comando es : "mkfile <nombre_archivo> <ruta>"
         ♦ mkdir: Metodo para crear una carpeta en la direccion actual.En nuestra sistema de archivos, no es posible que dos archivos o 
                  carpetas poseean el mismo nombre dentro de una misma carpeta (En su nivel 'inicial').
-        
+                ► El formato de este comando es : "mkdir <nombre_carpeta>"
         ♦ tree: Metodo para representar el sistema de archivos desde una direccion dada en forma de arbol. Si es '.' es desde la ubicacion actual, '..' desde el padre
                 de la ubicacion actual, '/' es la carpeta raiz y tambien pueden ser del siguiente estilo → '/hola/a' o 'a' si estamos en 'hola'.
-
+                ► El formato de este comando es : "tree <ruta>"
         ♦ exit: Metodo que nos permite salir de la 'terminal'.
-
+                ► El formato de este comando es : "exit"
         ♦ find: Metodo que nos devuelve una lista de los 'nodos' que cumplen con tener un nombre determinado, desde una ubicacion determinada. Ademas, este comando
                 fue implementado de manera tal que muestre en consola las apariciones de 'nodos' que cumplan la condicion ademas de las rutas que estos poseen.
-
+                ► El formato de este comando es : "find <ruta> <nombre_archivoOcarpeta>"
         En el caso de ingresar una ruta o nombre para un archivo/carpeta con el nombre de algunos de estos comandos, se mostrara en terminal el siguiente error:
             "Este nombre esta reservado, porfavor ingrese otro "
         Y en el caso de ingresar mal algun comando se mostrara alguno delos siguientes mensajes:

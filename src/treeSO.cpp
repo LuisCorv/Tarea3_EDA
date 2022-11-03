@@ -108,18 +108,35 @@ void TreeSO::mkfile(std::string nom, std::string ruta){
 			bool ans = false;
 
 			//validar si la ruta es valida (ver que exista la ruta entre las Ruta de cada Item, ademas de revisar que esta ruta no termine en un Tipo =0)
-			
-			if(ruta=="."){ 
+			if(ruta==".."){
+				if(dir->getName()==root->getName()){
+					std::cout<< "Comando invalido:  Usted desea ir al directorio padre de " << root->getName() <<"# , lo cual no es posible, ya que es la raiz del sistema de archivos "<<std::endl;
+					return;
+				}
+				parent=dir->getParent();
+				ans=true;
+			}
+			else if(ruta=="."){ 
 				ans=true;
 				parent=dir;
 			}
 			else{
-				parent=find_ruta(ruta);	//metodo validar ruta
-				if (parent==nullptr | parent->getType()==0){
-					ans=false;
+				if(find_ruta(ruta)!=nullptr){
+					parent=find_ruta(ruta);
+					ans=true;
 				}
+				else{
+					std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida."<<std::endl;
+					return;
+				}
+				
 			}
-			if (ans){ 
+			//metodo validar ruta
+			if (parent==nullptr | parent->getType()==0){
+					ans=false;
+			}
+
+			if (ans){ //arreglar este metodo
 				bool ans1 = true;
 				
 				//validar que no exista la carpeta con ese nombre
@@ -338,28 +355,40 @@ TreeList* TreeSO::find(std::string ruta, std::string nom){//Arreglar para que no
 	TreeList* ans=& list;
 	std::string nom_nodo;
 
-	if (find_ruta(ruta)!=nullptr){
-		nodo=find_ruta(ruta);
-	}
-	else{
-		bool check = true;
-		nodo=find_ruta(ruta);	//metodo validar ruta
-		if (nodo==nullptr | nodo->getType()==0){
-			check=false;
-		}
-		if (!check){
-			std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\n Esto puede ser debido a que se a ingresado el archivo '"<<nodo->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
+	if(ruta==".."){
+		if(dir->getName()==root->getName()){
+			std::cout<< "Comando invalido:  Usted desea ir al directorio padre de " << root->getName() <<"# , lo cual no es posible, ya que es la raiz del sistema de archivos "<<std::endl;
 			return ans;
 		}
+		nodo=dir->getParent();
+	}
+	else if(ruta=="."){
+		nodo=dir;
+	}
+	else{
+		if(find_ruta(ruta)!=nullptr){
+			nodo=find_ruta(ruta);
+		}
+		else{
+			std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida."<<std::endl;
+			 return ans;
+		}
+	}
+	
+	//metodo validar ruta
+	if (nodo==nullptr | nodo->getType()==0){
+		std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\n Esto puede ser debido a que se a ingresado el archivo '"<<nodo->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
+		return ans;
+	}
 		
 
-	}
+	
 	
 
 	//ver si es archivo o carpeta
 	if (nodo->getType()==1){		//si es carpeta
 			ans= find_rec(nom, nodo, &list);		//debe retornar una lista con todas las coincidencias encontradas.
-			
+
 			print_find(ans);	//Consideramos que es conveninete imprimir esta lista
 			return ans;
 	}
