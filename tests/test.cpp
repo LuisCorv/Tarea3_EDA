@@ -44,7 +44,7 @@ int main(int nargs, char** vargs){
 
 			car_arch = "";
 			extra = "";
-			if (inst != "exit" | inst != "tree"){
+			if (inst != "exit" ){
 				for (int j = 0; j < inicio.length(); j++){
 					if (inicio[j] != ' '){
 						car_arch = car_arch + inicio[j];
@@ -66,11 +66,8 @@ int main(int nargs, char** vargs){
 				flag = true;
 
 			}
-			else if (inst == "tree" & car_arch == "tree"){//Modificar esto, ya que tree deberia recibir una ruta del nodo
-					SO.tree();
-			}
 			
-			else if ((inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm") & extra == ""){	//Si recien solo 1 parametro
+			else if ((inst == "cd" | inst == "ls" | inst == "mkdir" | inst == "rm"| inst=="tree") & extra == ""){	//Si recien solo 1 parametro
 				
 				
 				if (inst == "cd"){	
@@ -124,6 +121,15 @@ int main(int nargs, char** vargs){
 					
 
 					
+				}
+
+				else if (inst == "tree"){//Modificar esto, ya que tree deberia recibir una ruta del nodo
+					if(car_arch==inst ){
+							cout << "Comando inválido, intente de nuevo" << endl;
+						}
+					else{
+						SO.tree(car_arch);
+					}
 				}
 
 				else if (inst == "ls"){ 

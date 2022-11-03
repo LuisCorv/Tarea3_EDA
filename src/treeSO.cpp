@@ -384,9 +384,34 @@ void TreeSO::tree_rec(Item* node, int level){
 	}
 }
 
-void TreeSO::tree(){		//♦♦♦♦Arreglar tree para que sea de un nodo dado y no desde raiz
-	tree_rec(root, 1);
-	std::cout<<"#" <<std::endl;
+void TreeSO::tree(std::string direccion){ //recibe una ruta		//♦♦♦♦Arreglar tree para que sea de un nodo dado y no desde raiz
+	Item*nodo;
+	bool ans=true;
+	if(direccion==".."){
+		if(dir->getName()==root->getName()){
+			std::cout<< "Comando invalido:  Usted desea ir al directorio padre de " << root->getName() <<"# , lo cual no es posible, ya que es la raiz del sistema de archivos "<<std::endl;
+			return;
+		}
+		nodo=dir->getParent();
+	}
+	else if(direccion=="."){
+		nodo=dir;
+	}
+	else{
+		if(find_ruta(direccion)!=nullptr){
+			nodo=find_ruta(direccion);
+		}
+		else{
+			std::cout<<"La ruta '"<<direccion<<"' ingresada es invalida."<<std::endl;
+			 ans=false;
+		}
+		
+	}
+	if (ans){
+		tree_rec(nodo, 1);
+		std::cout<<"#" <<std::endl;
+	}
+	
 }
 //------------------------------------------------------------------------------------------------------
 void TreeSO::exit(){

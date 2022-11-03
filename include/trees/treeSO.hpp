@@ -36,7 +36,7 @@ public:
 
 
 	void tree_rec(Item* node, int level);	//Funcion para imprimir en formato de arbol
-	void tree();
+	void tree(std::string direccion);
 
 	void exit();	//Funcion para salir del sistema de archivos
 
