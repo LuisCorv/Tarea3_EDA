@@ -59,7 +59,6 @@ int main(int nargs, char** vargs){
 			}
 			
 			//distintas instrucciones
-			cout<<car_arch;
 			if (inst == "exit" & car_arch == ""){// si no recibe parametro
 				SO.exit();
 				flag = true;

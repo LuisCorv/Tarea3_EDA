@@ -147,11 +147,11 @@ void TreeSO::mkfile(std::string nom, std::string ruta){
 				if (ans1){	//si no existe en la carpeta
 					if (parent != nullptr){
 						Item* child= new trees::Item(nom,0);
-						if(dir->getRuta()==root->getRuta()){
+						if(parent->getRuta()==root->getRuta()){  
 							child->setRuta(parent->getRuta()+nom);
 						}
 						else{
-							child->setRuta(parent->getRuta()+"/"+nom);
+							child->setRuta(parent->getRuta()+'/'+nom);
 						}
 						parent->getChildren()->insertFirst(child);
 						child->setParent(parent);
@@ -242,6 +242,9 @@ void TreeSO::cd(std::string ruta){
 		}
 		dir=dir->getParent();
 		
+	}
+	if (ruta=="."){
+		dir=dir;
 	}
 	else{
 		Item* parent= nullptr;	

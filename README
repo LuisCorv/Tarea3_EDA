@@ -61,6 +61,31 @@ Los pasos para utilizar el codigo son:
 
 
     -------------------------- Ejemplo de implementacion ------------------------------------
-
+-- Bienvenido a TreeSO -- 
+^^ Autores: Luis Corvalan y Macarena Ferrari ^^
+/#
+/#  mkdir a
+/#  mkdir b
+/#  mkfile c
+Comando inv├ílido, intente de nuevo
+/#  mkfile c a
+/#  cd ..
+Comando invalido, ya esta en la raiz del arbol
+/#  ls ..
+Comando invalido:  Usted desea ir al directorio padre de /# , lo cual no es posible, ya que es la raiz del sistema de archivos 
+/#  find a .
+# a  dir->(/a) 
+/#  tree /
+--/
+----b
+----a
+------c
+#
+/#  cd a
+/a#  ls .
+# c
+/#  exit
+Saliendo del sistema de archivos ... 
+Se a logrado salir con exito.
     
     
