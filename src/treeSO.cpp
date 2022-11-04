@@ -330,23 +330,39 @@ void print_find(TreeList* lista){
 	std::cout<<std::endl;
 }
 
-TreeList* TreeSO::find_rec(std::string nom, Item* node, TreeList* lista){ //Arreglar para que nos de lo que piden
+TreeList* TreeSO::find_rec(std::string nom, Item* node, TreeList* lista){ 
 	Item* ans = nullptr;
 	if (node != nullptr){
-		if (node->getName() == nom){
+		if (node->getName() == nom and node->getType()==0){
 			ans=new Item(node->getName(),node->getType()); //copiamos los datos basicos del nodo, es decir nombre, tipo y su ruta
 			ans->setRuta(node->getRuta());		//si posteriormente se quisiese saber su padre, buscamos en base a esa ruta
 			lista->insertFirst(ans);
 		}
-		else{ // search in children
-			TreeList* childrenList = node->getChildren();
-			TreeListNode* ptr = childrenList->getHead();
-			if (ptr==nullptr){
-			return lista;}
-			while (ptr!=nullptr && ans == nullptr){
-				lista = find_rec(nom, ptr->getData(),lista);
-				ptr = ptr->getNext();
+		else if (node->getType()==1){ // search in children
+			if (node->getName() == nom){
+				ans=new Item(node->getName(),node->getType()); //copiamos los datos basicos del nodo, es decir nombre, tipo y su ruta
+				ans->setRuta(node->getRuta());		//si posteriormente se quisiese saber su padre, buscamos en base a esa ruta
+				lista->insertFirst(ans);
+				TreeList* childrenList = node->getChildren();
+				TreeListNode* ptr = childrenList->getHead();
+				if (ptr==nullptr){
+				return lista;}
+				while (ptr!=nullptr){
+					lista = find_rec(nom, ptr->getData(),lista);
+					ptr = ptr->getNext();
+				}	
+			}
+			else{
+				TreeList* childrenList = node->getChildren();
+				TreeListNode* ptr = childrenList->getHead();
+				if (ptr==nullptr){
+				return lista;}
 				
+				while (ptr!=nullptr && ans == nullptr){
+					lista = find_rec(nom, ptr->getData(),lista);
+					
+					ptr = ptr->getNext();
+				}
 			}
 		}
 	}
@@ -377,7 +393,6 @@ TreeList* TreeSO::find(std::string ruta, std::string nom){//Arreglar para que no
 			 return ans;
 		}
 	}
-	
 	//metodo validar ruta
 	if (nodo==nullptr | nodo->getType()==0){
 		std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\n Esto puede ser debido a que se a ingresado el archivo '"<<nodo->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
