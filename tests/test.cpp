@@ -23,7 +23,7 @@ int main(int nargs, char** vargs){
 		getline(cin, inicio);
 
 		if (inicio.length() == 0){
-			cout<<"El comando ingresado no es válido"<<endl;
+			cout<<"El comando ingresado no es valido"<<endl;
 		}
 		else {
 			
