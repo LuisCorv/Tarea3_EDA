@@ -71,7 +71,7 @@ int main(int nargs, char** vargs){
 				if (inst == "cd"){	
 					bool ans = true;
 					if(car_arch==inst ){
-							cout << "Comando inválido, intente de nuevo" << endl;
+							cout << "Comando invalido, intente de nuevo" << endl;
 						}
 					else{
 						if (ruta == "/# "){																			
@@ -123,7 +123,7 @@ int main(int nargs, char** vargs){
 
 				else if (inst == "tree"){//Modificar esto, ya que tree deberia recibir una ruta del nodo
 					if(car_arch==inst ){
-							cout << "Comando inválido, intente de nuevo" << endl;
+							cout << "Comando invalido, intente de nuevo" << endl;
 						}
 					else{
 						SO.tree(car_arch);
@@ -132,7 +132,7 @@ int main(int nargs, char** vargs){
 
 				else if (inst == "ls"){ 
 					if(car_arch==inst ){
-							cout << "Comando inválido, intente de nuevo" << endl;
+							cout << "Comando invalido, intente de nuevo" << endl;
 						}
 					else{
 						SO.ls(car_arch);
@@ -166,7 +166,7 @@ int main(int nargs, char** vargs){
 			}
 
 			else {
-				cout << "Comando inválido, intente de nuevo" << endl;
+				cout << "Comando invalido, intente de nuevo" << endl;
 			}
 		}
 	}
