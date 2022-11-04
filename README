@@ -51,7 +51,7 @@ Los pasos para utilizar el codigo son:
             ♣ "La ruta 'ruta' ingresada es invalida.
              Esto puede ser debido a que se a ingresado el archivo 'parent' como termino de la ruta y no una carpeta " → 'ruta' es la ruta ingresada y 'parent' es el nombre del archivo/carpeta ingresada
             
-             ♣ "Comando inválido, intente de nuevo "
+             ♣ "Comando invalido, intente de nuevo "
             
             ♣ "El archivo/carpeta 'nom' ingresado/ingresada para eliminar es invalido/invalida." → 'nom' es el nombre de la carpeta/archivo ingresado
             

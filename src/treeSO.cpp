@@ -195,6 +195,10 @@ void TreeSO::ls(std::string ruta){
 		std::cout<<"# ";
 		TreeList* childrenList = dir->getChildren();
 		TreeListNode* ptr = childrenList->getHead();
+		if(ptr==nullptr){
+			std::cout<<std::endl;
+			return;
+		}
 		ls_rec(ptr);
 		std::cout<<std::endl;
 	
@@ -209,6 +213,10 @@ void TreeSO::ls(std::string ruta){
 		
 		TreeList* childrenList = parent->getChildren();
 		TreeListNode* ptr = childrenList->getHead();
+		if(ptr==nullptr){
+			std::cout<<std::endl;
+			return;
+		}
 		ls_rec(ptr);
 		
 		std::cout<<std::endl;
@@ -218,17 +226,26 @@ void TreeSO::ls(std::string ruta){
 		Item* parent= nullptr;	
 		bool ans = true;
 		parent=find_ruta(ruta);	//metodo validar ruta
-		if (parent==nullptr | parent->getType()==0){
+		if (parent==nullptr){
 			ans=false;
+		}
+		else{
+			if (parent->getType()==0){
+			ans=false;
+			}
 		}
 		if(ans){
 			std::cout<< ruta <<"# \n# ";
 			TreeList* childrenList = parent->getChildren();
 			TreeListNode* ptr = childrenList->getHead();
+			if(ptr==nullptr){
+				std::cout<<std::endl;
+				return;
+			}
 			ls_rec(ptr);
 			std::cout<<std::endl;}
 		else{
-			std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\n Esto puede ser debido a que se a ingresado el archivo '"<<parent->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
+			std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida."<<std::endl;
 		}
 
 	}
@@ -261,14 +278,20 @@ void TreeSO::cd(std::string ruta){
 			}
 		}
 		parent=find_ruta(ruta);	//metodo validar ruta
-		if (parent==nullptr | parent->getType()==0){
+		
+		if (parent==nullptr){
 			ans=false;
 		}
+		else {
+			if(parent->getType()==0){
+			ans=false;}
+		}
+		
 		if (ans){
 			dir=parent;			//actualizamos dir
 		}
 		else{
-			std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida.\nEsto puede ser debido a que se a ingresado el archivo '"<<parent->getName()<<"' como termino de la ruta y no una carpeta"<<std::endl;
+			std::cout<<"La ruta '"<<ruta<<"' ingresada es invalida."<<std::endl;
 		}
 			
 	}
@@ -477,6 +500,7 @@ Item* TreeSO::find_ruta_rec(std::string nom, Item* node){
 	if (node != nullptr){
 		if (node->getRuta() == nom){
 			ans = node;
+			return ans;
 		}
 		else{ // search in children
 			TreeList* childrenList = node->getChildren();
@@ -484,6 +508,7 @@ Item* TreeSO::find_ruta_rec(std::string nom, Item* node){
 			while (ptr!=nullptr && ans == nullptr){
 				ans = find_ruta_rec(nom, ptr->getData());
 				ptr = ptr->getNext();
+				
 			}
 		}
 	}

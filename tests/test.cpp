@@ -76,7 +76,12 @@ int main(int nargs, char** vargs){
 					else{
 						if (ruta == "/# "){																			
 						if (car_arch != ".."){
-							ruta = "/" + car_arch ;
+							if (car_arch[0]=='/'){
+								ruta=car_arch;
+								}
+							else{
+								ruta = "/" + car_arch ;
+							}
 							
 						}
 						else{
@@ -101,10 +106,12 @@ int main(int nargs, char** vargs){
 							
 							
 						}
-						
+						else if (car_arch[0]=='/'){
+							ruta=car_arch;
+						}
 						else {				
 							ruta = ruta.erase(ruta.length()-2, 2);
-							ruta = ruta + "/" + car_arch ;
+							ruta = ruta + '/'+ car_arch ;
 
 						}
 						
@@ -135,7 +142,18 @@ int main(int nargs, char** vargs){
 							cout << "Comando invalido, intente de nuevo" << endl;
 						}
 					else{
-						SO.ls(car_arch);
+						if (car_arch[0]=='/'){
+							ruta=car_arch;
+						}
+						else if(car_arch=="." or car_arch==".."){
+							ruta=car_arch;
+						}
+						else {				
+							ruta = ruta.erase(ruta.length()-2, 2);
+							ruta = ruta + '/'+ car_arch ;
+
+						}
+						SO.ls(ruta);
 					}
 					
 				}
